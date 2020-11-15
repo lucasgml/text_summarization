@@ -72,10 +72,13 @@ def sentence_score(sentence_list,word_frequencies,portuguese):
                     sentence_scores[sentence] += word_frequencies[word]
     return sentence_scores
 
-def generate_summary(sentence_list,sentence_scores,result,number_of_phrases):
+def generate_summary(sentence_list,sentence_scores,result,number_of_phrases,first_paragraph):
     summary_sentences = heapq.nlargest(number_of_phrases, sentence_scores, key=sentence_scores.get)
     sorted_summary = [sentence for sentence in sentence_list if sentence in summary_sentences]
-    summary = result.summary.split('\n')[0] + '\n'.join(sorted_summary)
+    if(first_paragraph):
+        summary = result.summary.split('\n')[0] + '\n'.join(sorted_summary)
+    else:
+        summary = ''.join(sorted_summary)
     return(summary)
     
 
@@ -105,6 +108,8 @@ except:
         st.write('Você não utilizou um número. Escolhendo 10 frases.')
     else:
         st.write('Your choice was not a number. Using 10 phrases')
+        
+first_paragraph = st.checkbox('Include the first paragraph of the article?',True)
 
 progress_bar = st.progress(0)
 result = wikipedia.page(page)
@@ -126,7 +131,7 @@ progress_bar.progress(80)
 sentence_scores = sentence_score(sentence_list,word_frequencies,portuguese)
 
 progress_bar.progress(90)
-summary = generate_summary(sentence_list,sentence_scores,result,number_of_phrases)
+summary = generate_summary(sentence_list,sentence_scores,result,number_of_phrases,first_paragraph)
 
 progress_bar.progress(100)
 st.write(summary)
