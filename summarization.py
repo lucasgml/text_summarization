@@ -138,3 +138,5 @@ summary = generate_summary(sentence_list,sentence_scores,result,number_of_phrase
 
 progress_bar.progress(100)
 st.write(summary)
+
+st.markdown('App developed by <a href="https://github.com/lucasgml">Lucas Leite</a>',unsafe_allow_html=True)
