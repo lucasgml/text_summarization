@@ -109,7 +109,10 @@ except:
     else:
         st.write('Your choice was not a number. Using 10 phrases')
         
-first_paragraph = st.checkbox('Include the first paragraph of the article?',True)
+if(portuguese):
+    first_paragraph = st.checkbox('Incluir o primeiro paragrafo do artigo?',True)
+else:
+    first_paragraph = st.checkbox('Include the first paragraph of the article?',True)
 
 progress_bar = st.progress(0)
 result = wikipedia.page(page)
