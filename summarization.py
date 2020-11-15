@@ -8,8 +8,8 @@ import re
 import streamlit as st
 import heapq
 
-#nltk.download('punkt')
-#nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('stopwords')
 
 def content_preprocessing(content):
     content = re.sub(r'[.]+(?!([0-9]|\ |[A-Z]{1}\.))', r'. ', content)
